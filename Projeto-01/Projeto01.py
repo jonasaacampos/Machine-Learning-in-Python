@@ -48,8 +48,8 @@ import seaborn as sns
 # Essas serão as classes que usaremos como variável target
 assuntos = ["datascience", "machinelearning", "physics", "astrology", "conspiracy"]
 tamanho_min_post = 100
-quantidade_post_minerar = 100  # limite de 1000 de acordo com termos de uso da api
-tamanho_amostra_post = 80
+quantidade_post_minerar = 1000  # limite de 1000 de acordo com termos de uso da api
+tamanho_amostra_post = 120
 
 
 def api_reddit_connection():
@@ -117,7 +117,7 @@ RANDOM_STATE = 0
 def split_data():
 
     print(
-        f"Dividir {100 * TEST_SIZE}% dos dados para treinamento e avaliação do modelo..."
+        f"Dividir {100 * TEST_SIZE}% dos dados para teste e avaliação do modelo..."
     )
 
     X_treino, X_teste, y_treino, y_teste = train_test_split(
@@ -169,6 +169,7 @@ def pre_process_pipeline():
 # Variáveis de controle
 N_NEIGHBORS = 4
 CV = 3
+MAX_ITER = 3000
 
 
 def make_models():
@@ -180,7 +181,7 @@ def make_models():
 
     modelo_1 = KNeighborsClassifier(n_neighbors=N_NEIGHBORS)
     modelo_2 = RandomForestClassifier(random_state=RANDOM_STATE)
-    modelo_3 = LogisticRegressionCV(cv=CV, random_state=RANDOM_STATE)
+    modelo_3 = LogisticRegressionCV(cv=CV, random_state=RANDOM_STATE, max_iter = MAX_ITER)
 
     modelos = [("KNN", modelo_1), ("RandomForest", modelo_2), ("LogReg", modelo_3)]
 
@@ -194,7 +195,7 @@ def train_test(modelos, pipeline, X_treino, X_teste, y_treino, y_teste):
 
     for nome, modelo in modelos:
         # treinamento
-        pipe = Pipeline(pipeline + [(nome, modelo)])
+        pipe = Pipeline(pre_process_pipeline() + [(nome, modelo)])
         print(f"Treinando o modelo {nome}...")
         pipe.fit(X_treino, y_treino)
 
