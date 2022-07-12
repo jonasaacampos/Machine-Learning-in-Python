@@ -8,17 +8,39 @@ import re
 import praw
 import config
 import numpy as np
-from sklearn.model_selection import train_test_split        # dividir dados de treino e teste
-from sklearn.feature_extraction.text import TfidfVectorizer # preparar matriz com dados de texto
-from sklearn.decomposition import TruncatedSVD              # reduzir a dimensionalidade
-from sklearn.neighbors import KNeighborsClassifier          # algoritmo de machine learning
-from sklearn.ensemble import RandomForestClassifier         # algoritmo de machine learning
-from sklearn.linear_model import LogisticRegressionCV       # algoritmo de machine learning
-from sklearn.metrics import classification_report           # imprimir as métricas de classficação dos modelos
-from sklearn.pipeline import Pipeline                       # sequência de desenvolvimento
-from sklearn.metrics import confusion_matrix                # imprimir modelo e avaliar performance
-import matplotlib.pyplot as plt                             # visualização dos dados
-import seaborn as sns                                       # visualização dos dados
+
+# dividir dados de treino e teste
+from sklearn.model_selection import train_test_split
+
+# preparar matriz com dados de texto
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+# reduzir a dimensionalidade
+from sklearn.decomposition import TruncatedSVD
+
+# algoritmo de machine learning
+from sklearn.neighbors import KNeighborsClassifier
+
+# algoritmo de machine learning
+from sklearn.ensemble import RandomForestClassifier
+
+# algoritmo de machine learning
+from sklearn.linear_model import LogisticRegressionCV
+
+# imprimir as métricas de classficação dos modelos
+from sklearn.metrics import classification_report
+
+# sequência de desenvolvimento
+from sklearn.pipeline import Pipeline
+
+# imprimir modelo e avaliar performance
+from sklearn.metrics import confusion_matrix
+
+# visualização dos dados
+import matplotlib.pyplot as plt
+
+# visualização dos dados
+import seaborn as sns
 
 # Carregando os Dados
 
@@ -43,7 +65,10 @@ def api_reddit_connection():
     print(api_reddit.user.me())
     return api_reddit
 
+
 # Carregamento de dados
+
+
 def load_data():
     # Contamos o número de caracteres usando expressões regulares
     def char_count(post):
@@ -61,7 +86,9 @@ def load_data():
 
         # Extrai os posts
         subreddit_data = (
-            api_reddit_connection().subreddit(assunto).new(limit=quantidade_post_minerar)
+            api_reddit_connection()
+            .subreddit(assunto)
+            .new(limit=quantidade_post_minerar)
         )
 
         # Filtra os posts que não satisfazem nossa condição
@@ -85,6 +112,7 @@ def load_data():
 # variáveis de controle para gerar o mesmo padrão de aletoriedade
 TEST_SIZE = 0.2
 RANDOM_STATE = 0
+
 
 def split_data():
 
@@ -124,7 +152,7 @@ def pre_process_pipeline():
     # TfidfVectorizer combina as opões de CountVectorizer e TfidfTransformer em um único modelo
     # TfidfVectorizer faz a tokenização, a contagem de palavras, normaliza, e retorna uma matriz
     vectorizer = TfidfVectorizer(
-        preprocessor = clean_patterns, stop_words="english", min_df=MIN_DOC_FREQ
+        preprocessor=clean_patterns, stop_words="english", min_df=MIN_DOC_FREQ
     )
 
     # Redução da dimensionalidade da matriz TF-IDF (maldição da dimensionalidade)
@@ -137,25 +165,101 @@ def pre_process_pipeline():
     return pipeline
 
 
-## Seleção do Modelo
+# Seleção do Modelo
 # Variáveis de controle
 N_NEIGHBORS = 4
 CV = 3
 
-def make_models():
 
+def make_models():
     """_summary_
 
     Returns:
         _type_: _description_
-    """    
+    """
 
-    modelo_1 = KNeighborsClassifier(n_neighbors = N_NEIGHBORS)
-    modelo_2 = RandomForestClassifier(random_state = RANDOM_STATE)
-    modelo_3 = LogisticRegressionCV(cv = CV, random_state = RANDOM_STATE)
+    modelo_1 = KNeighborsClassifier(n_neighbors=N_NEIGHBORS)
+    modelo_2 = RandomForestClassifier(random_state=RANDOM_STATE)
+    modelo_3 = LogisticRegressionCV(cv=CV, random_state=RANDOM_STATE)
 
     modelos = [("KNN", modelo_1), ("RandomForest", modelo_2), ("LogReg", modelo_3)]
-    
+
     return modelos
 
 
+def train_test(modelos, pipeline, X_treino, X_teste, y_treino, y_teste):
+    """_summary_"""
+
+    resultados = []
+
+    for nome, modelo in modelos:
+        # treinamento
+        pipe = Pipeline(pipeline + [(nome, modelo)])
+        print(f"Treinando o modelo {nome}...")
+        pipe.fit(X_treino, y_treino)
+
+        # previsões
+        y_pred = pipe.predict(X_teste)
+
+        # cálculo das métricas
+        report = classification_report(y_teste, y_pred)
+        print(f"Relatório de Classificação\n{report}")
+
+        resultados.append(
+            [modelo, {"modelo": nome, "previsões": y_pred, "report": report}]
+        )
+    return resultados
+
+
+# Executando o Pipeline Para Todos os Modelos
+# Pipeline de Machine Learning
+
+
+if __name__ == "__main__":
+
+    data, labels = load_data()
+    X_treino, X_teste, y_treino, y_teste = split_data()
+    pipeline = pre_process_pipeline()
+    all_models = make_models()
+    resultados = train_test(all_models, pipeline, X_treino, X_teste, y_treino, y_teste)
+
+    print("Finalizado com sucesso!")
+
+# Visualização dos resultados
+
+
+def plot_distribution():
+    _, counts = np.unique(labels, return_counts=True)
+    sns.set_theme(style="whitegrid")
+    plt.figure(figsize=(15, 6), dpi=120)
+    plt.title("Quantidade de postagens por assunto")
+    sns.barplot(x = assuntos, y = counts)
+    plt.legend(' '.join([f.title(), f' - {c} posts']) for f,c in zip(assuntos, counts))
+    plt.show()
+
+
+def plot_confusion(resultados):
+    print(f'Relatório de Classificação\n', resultados[-1]['report'])
+    y_pred = resultados[-1]['predictions']
+    _, test_counts = np.unique(y_teste, return_counts = True)
+    conf_matrix_percent = conf_matrix / test_counts.transpose() * 100
+    plt.figure(figsize = (9,8), dpi = 120)
+    plt.title(result[-1]['modelo'].upper() + " Resultados")
+    plt.xlabel("Valor Real")
+    plt.ylabel("Previsão do Modelo")
+    ticklabels = [f"r/{sub}" for sub in assuntos]
+    sns.heatmap(data = conf_matrix_percent, xticklabels = ticklabels, yticklabels = ticklabels, annot = True, fmt = '.2f')
+    plt.show()
+    
+
+# Gráfico de avaliação
+plot_distribution()
+
+# Resultado do KNN
+plot_confusion(resultados[0])
+
+# Resultado do RandomForest
+plot_confusion(resultados[1])
+
+# Resultado da Regressão Logística
+plot_confusion(resultados[2])
