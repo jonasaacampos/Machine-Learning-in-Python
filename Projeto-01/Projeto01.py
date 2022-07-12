@@ -245,7 +245,7 @@ def plot_confusion(resultado):
     _, test_counts = np.unique(y_teste, return_counts = True)
     conf_matrix_percent = conf_matrix / test_counts.transpose() * 100
     plt.figure(figsize = (9,8), dpi = 120)
-    plt.title(resultads[-1]['modelo'].upper() + " Resultados")
+    plt.title(resultado[-1]['modelo'].upper() + " Resultados")
     plt.xlabel("Valor Real")
     plt.ylabel("Previsão do Modelo")
     ticklabels = [f"r/{sub}" for sub in assuntos]
