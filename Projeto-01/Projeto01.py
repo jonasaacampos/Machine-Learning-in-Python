@@ -1,71 +1,89 @@
 # Projeto 1 - Classificação de Texto com Aprendizagem Supervisionada
 
 # Pacotes
-import re                                                      # para expressão regular
-import praw                                                    # para conexão com a API do reddit
+# para expressão regular
+import re
+# para conexão com a API do reddit
+import praw
 import config
 import numpy as np
-from sklearn.model_selection import train_test_split           # dividir dados de treino e teste
-from sklearn.feature_extraction.text import TfidfVectorizer    # preparar matriz com dados de texto
-from sklearn.decomposition import TruncatedSVD                 # reduzir a dimensionalidade
-from sklearn.neighbors import KNeighborsClassifier             # algoritmo de machine learning
-from sklearn.ensemble import RandomForestClassifier            # algoritmo de machine learning
-from sklearn.linear_model import LogisticRegressionCV          # algoritmo de machine learning
-from sklearn.metrics import classification_report              # imprimir as métricas de classficação dos modelos
-from sklearn.pipeline import Pipeline                          # sequência de desenvolvimento
-from sklearn.metrics import confusion_matrix                   # imprimir modelo e avaliar performance
-import matplotlib.pyplot as plt                                # visualização dos dados
-import seaborn as sns                                          # visualização dos dados
+# dividir dados de treino e teste
+from sklearn.model_selection import train_test_split
+# preparar matriz com dados de texto
+from sklearn.feature_extraction.text import TfidfVectorizer
+# reduzir a dimensionalidade
+from sklearn.decomposition import TruncatedSVD
+# algoritmo de machine learning
+from sklearn.neighbors import KNeighborsClassifier
+# algoritmo de machine learning
+from sklearn.ensemble import RandomForestClassifier
+# algoritmo de machine learning
+from sklearn.linear_model import LogisticRegressionCV
+# imprimir as métricas de classficação dos modelos
+from sklearn.metrics import classification_report
+# sequência de desenvolvimento
+from sklearn.pipeline import Pipeline
+# imprimir modelo e avaliar performance
+from sklearn.metrics import confusion_matrix
+# visualização dos dados
+import matplotlib.pyplot as plt
+# visualização dos dados
+import seaborn as sns
 
-## Carregando os Dados
+# Carregando os Dados
 
-# Lista de temas que usaremos para buscas no Reddit. 
+# Lista de temas que usaremos para buscas no Reddit.
 # Essas serão as classes que usaremos como variável target
-assuntos = ['politica', 'partidos', 'lula', 'bolsonaro', 'conspiração', 'comunismo']
+assuntos = ['politica', 'partidos', 'lula',
+            'bolsonaro', 'conspiração', 'comunismo']
 tamanho_min_post = 100
-quantidade_post_minerar = 100       #limite de 1000 de acordo com termos de uso da api
+quantidade_post_minerar = 1000  # limite de 1000 de acordo com termos de uso da api
+
 
 def apiRedditConection():
-   api_reddit = praw.Reddit(client_id = "8ZXmCNi4cHYXh5FyVCZI7Q", 
-                        client_secret = "VuRph69q7ai4m9CC-qrXh9YRag3mtg",
-                        password = "bele2012",
-                        user_agent = "jaac-script-app",
-                        username = "Vegetable-Carrot7306")
-   #verifica se conexão foi realizada com sucesso
-   usuario = api_reddit.user.me()
-   return(f"Usuário " + {usuario} + 'logado com sucesso')
-   
-   
+    api_reddit = praw.Reddit(client_id="8ZXmCNi4cHYXh5FyVCZI7Q",
+                             client_secret="VuRph69q7ai4m9CC-qrXh9YRag3mtg",
+                             password="bele2012",
+                             user_agent="jaac-script-app",
+                             username="Vegetable-Carrot7306")
+    # verifica se conexão foi realizada com sucesso
+    print('Usuário logado!')
+    print(api_reddit.user.me())
+    return(api_reddit)
+
+
 def carregaDados():
 
-   apiRedditConection()
-   
-  """  #conta caracteres  e dígitos dos posts
-   char_count = lambda post: len(re.sub('\W|\d', '', post.selftext))
-   #filtrar filtros para posts com mais de x caracteres
-   mask = lambda post: char_count >= tamanho_min_post
-   
-   #resultadodos armazenados em listas
-   data =[]
-   labels = []
-   
-   for i, assunto in enumerate(assuntos):
+    # Contamos o número de caracteres usando expressões regulares
+    def char_count(post): return len(re.sub('\W|\d', '', post.selftext))
 
-      # Extrai os posts
-      subreddit_data = api_reddit.subreddit(assunto).new(limit = 10)
+    # Definimos a condição para filtrar os posts (retornaremos somente posts com 100 ou mais caracteres)
+    def mask(post): return char_count(post) >= tamanho_min_post
 
-      # Filtra os posts que não satisfazem nossa condição
-      posts = [post.selftext for post in filter(mask, subreddit_data)]
+    # Listas para os resultados
+    data = []
+    labels = []
 
-      # Adiciona posts e labels às listas
-      data.extend(posts)
-      labels.extend([i] * len(posts))
+    # Loop
+    for i, assunto in enumerate(assuntos):
 
-   return data, labels """
+        # Extrai os posts
+        subreddit_data = apiRedditConection().subreddit(assunto).new(limit = quantidade_post_minerar)
+
+        # Filtra os posts que não satisfazem nossa condição
+        posts = [post.selftext for post in filter(mask, subreddit_data)]
+
+        # Adiciona posts e labels às listas
+        data.extend(posts)
+        labels.extend([i] * len(posts))
+
+        # Print
+        print(f"Número de posts do assunto {assunto}: {len(posts)}", f"\nUm dos posts extraídos: {posts[0][:80]}...\n",
+              "_" * 80 + '\n')
+
+    return data, labels
 
 
 carregaDados()
 
-   
-   
-
+print("done!")
