@@ -239,13 +239,13 @@ def plot_distribution():
     plt.show()
 
 
-def plot_confusion(resultados):
-    print(f'Relatório de Classificação\n', resultados[-1]['report'])
-    y_pred = resultados[-1]['predictions']
+def plot_confusion(resultado):
+    print(f'Relatório de Classificação\n', resultado[-1]['report'])
+    y_pred = resultado[-1]['predictions']
     _, test_counts = np.unique(y_teste, return_counts = True)
     conf_matrix_percent = conf_matrix / test_counts.transpose() * 100
     plt.figure(figsize = (9,8), dpi = 120)
-    plt.title(result[-1]['modelo'].upper() + " Resultados")
+    plt.title(resultads[-1]['modelo'].upper() + " Resultados")
     plt.xlabel("Valor Real")
     plt.ylabel("Previsão do Modelo")
     ticklabels = [f"r/{sub}" for sub in assuntos]
