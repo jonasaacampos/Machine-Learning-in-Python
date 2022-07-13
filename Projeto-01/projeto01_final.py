@@ -28,6 +28,19 @@ quantidade_min_char_post = 100
 quantidade_post_minerar = 1000  # limite de 1000 de acordo com termos de uso da api
 tamanho_amostra_post = 120
 
+def insert_secrets():
+    with open("Projeto-01/secrets_reddit.txt", "r") as text:
+        lines = tf.read()
+
+    client_id = lines[1]
+    client_secret = lines[3]
+    password = lines[5]
+    user_agent = lines[7]
+    username = lines[9]
+    
+    return client_id, client_secret, password, user_agent, username
+
+
 def api_reddit_connection():
     api_reddit = praw.Reddit(
         client_id="8ZXmCNi4cHYXh5FyVCZI7Q",
