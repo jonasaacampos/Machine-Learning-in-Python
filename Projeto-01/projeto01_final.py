@@ -28,27 +28,38 @@ quantidade_min_char_post = 100
 quantidade_post_minerar = 1000  # limite de 1000 de acordo com termos de uso da api
 tamanho_amostra_post = 120
 
-def insert_secrets():
-    with open("Projeto-01/secrets_reddit.txt", "r") as text:
-        lines = tf.read()
+def insert_secret():
+    
+    list_info = []
 
-    client_id = lines[1]
-    client_secret = lines[3]
-    password = lines[5]
-    user_agent = lines[7]
-    username = lines[9]
+    f = open("C:\github\Machine-Learning-in-Python-C\Projeto-01\secrets_reddit.txt", "r")
+    for x in f:
+      list_info.append(x)
+    f.close()
+
+    client_id = list_info[1:-3]
+    client_secret = list_info[3:-3]
+    password = list_info[5:-3]
+    user_agent = list_info[7:-3]
+    username = list_info[9:-3]
+    
+    f.close()
     
     return client_id, client_secret, password, user_agent, username
 
 
 def api_reddit_connection():
+    
+    client_id_hide, client_secret_hide, password_hide, user_agent_hide, username_hide = insert_secret()
+    
     api_reddit = praw.Reddit(
-        client_id="8ZXmCNi4cHYXh5FyVCZI7Q",
-        client_secret="VuRph69q7ai4m9CC-qrXh9YRag3mtg",
-        password="bele2012",
-        user_agent="jaac-script-app",
-        username="Vegetable-Carrot7306",
+        client_id = client_id_hide,
+        client_secret = client_secret_hide,
+        password = password_hide,
+        user_agent = user_agent_hide,
+        username = username_hide,
     )
+
     # verifica se conexão foi realizada com sucesso
     # print("Usuário logado!")
     # print(api_reddit.user.me())
