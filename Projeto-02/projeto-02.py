@@ -20,9 +20,23 @@ def load_data(fileData):
          ({df.shape[0]} linhas X {df.shape[1]} colunas)
          ''')
    print(df.head())
+   return df
+
+
+def chart_generate(df, x, y, title):
+   df = df
+   df.plot(x = x, y = y, style = 'o')
+   plt.title(title)
+   plt.xlabel(x)
+   plt.ylabel(y)
+   plt.savefig('img/pt01-fig01.png')
+   
+
+def data_preparation(df):
+   X = df.iloc[:, :, 1].values
+   y = df.iloc[:, 1].values
 
 
 arquivo = 'Projeto-02/data/dataset.csv'
 
-
-load_data(arquivo)
+chart_generate(load_data(arquivo), 'Investimento', 'Retorno', 'Investimento X Retorno')
