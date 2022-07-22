@@ -102,3 +102,25 @@ actual = plt.bar(index, df_valores["Real"], bar_width, label="Valor Real")
 plt.xlabel("Investimento")
 plt.ylabel("Retorno")
 plt.title("Valor Real X Previsto")
+plt.xticks(index + bar_width, X_teste)
+plt.legend()
+plt.savefig("img/part01-atual-vs-previsto.png")
+# plt.show()
+
+## inserindo dados desconhecidos...
+print("------------------------")
+print("Previsão para retorno com novos dados")
+
+input_investimento = float(input("Digite o valor do investimento: ").strip())
+investimento = np.array([input_investimento])
+investimento = investimento.reshape(-1, 1)
+
+
+# previsões
+pred_score = modelo.predict(investimento)
+print(
+    f"""
+        Investimento realizado: {input_investimento}
+        Retorno previsto      : {pred_score[0]:.4}%
+      """
+)
