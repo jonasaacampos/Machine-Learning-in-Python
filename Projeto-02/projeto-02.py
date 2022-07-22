@@ -120,7 +120,7 @@ investimento = investimento.reshape(-1, 1)
 pred_score = modelo.predict(investimento)
 print(
     f"""
-        Investimento realizado: {input_investimento}
-        Retorno previsto      : {pred_score[0]:.4}%
+        Investimento realizado: {input_investimento:.2f}
+        Retorno previsto      : {pred_score[0]:.4f}%
       """
 )
