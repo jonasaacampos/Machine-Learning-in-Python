@@ -37,7 +37,9 @@ b1 = coeficiente
 
 b0 e b1 são estimados durante o treinamento com dados históricos
 ```
-
+## To do
+- [ ] Fazer funções para organizar código
+- [ ] 
 ## Para saber mais
 
 - IBM, 2022. [Regressão linear - Gere previsões usando uma fórmula matemática facilmente interpretada.](https://www.ibm.com/br-pt/analytics/learn/linear-regression)
