@@ -41,8 +41,28 @@ b0 e b1 são estimados durante o treinamento com dados históricos
 - variáveis dependentes são apenas medidas ou registradas
 
 ## To do
-- [ ] Fazer funções para organizar código
-- [ ] 
+- [x] Fazer funções para organizar código
+
+## Demo
+
+
+
+<table>
+<thead>
+  <tr>
+    <th></th>
+    <th></th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td><img scr='../img/part01-atual-vs-previsto.png'></td>
+    <td></td>
+  </tr>
+</tbody>
+</table>
+
+
 ## Para saber mais
 
 - IBM, 2022. [Regressão linear - Gere previsões usando uma fórmula matemática facilmente interpretada.](https://www.ibm.com/br-pt/analytics/learn/linear-regression)
