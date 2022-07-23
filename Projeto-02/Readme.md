@@ -37,10 +37,14 @@ b1 = coeficiente
 
 b0 e b1 são estimados durante o treinamento com dados históricos
 ```
+- Variáveis independentes são aquelas que são manipuladas
+- variáveis dependentes são apenas medidas ou registradas
+
 ## To do
 - [ ] Fazer funções para organizar código
 - [ ] 
 ## Para saber mais
 
 - IBM, 2022. [Regressão linear - Gere previsões usando uma fórmula matemática facilmente interpretada.](https://www.ibm.com/br-pt/analytics/learn/linear-regression)
-- 
+- DataScience, 2000. [Uma Atualização na Análise de Regressão](https://datascience.eu/pt/matematica-e-estatistica/uma-atualizacao-na-analise-de-regressao/)
+- [Métodos e fórmulas para coeficientes em Ajustar modelo de regressão](https://support.minitab.com/pt-br/minitab/18/help-and-how-to/modeling-statistics/regression/how-to/fit-regression-model/methods-and-formulas/coefficients/#:~:text=Coeficiente%20%28Coef.%29%20A%20f%C3%B3rmula%20para%20o%20coeficiente%20ou,regress%C3%A3o%20m%C3%BAltipla%20%C3%A9%3A%20b%20%3D%20%28%20X%27X%29%20-1X%27y.)

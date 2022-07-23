@@ -9,7 +9,6 @@ from sklearn.model_selection import train_test_split  # treina modelo
 from sklearn.metrics import mean_squared_log_error, mean_absolute_error, r2_score
 
 import warnings
-
 warnings.filterwarnings("ignore")
 
 
@@ -28,7 +27,16 @@ def load_data(fileData):
 
 
 def chart_generate(df, x, y, title):
-    df = df
+    """
+    Gera um gráfico de dispersão e salva-o como arquivo de imagem.
+    O objetivo é ter uma visão geral dos dados
+    
+    Args:
+        df (pandas.DataFrame): dataframe com os dados
+        x (pandas.Series): Coluna do dataframe com o eixo X
+        y (pandas.Series): Coluna do dataframe com o eixo y
+        title (str): Título do gráfico
+    """    
     df.plot(x=x, y=y, style="o")
     plt.title(title)
     plt.xlabel(x)
@@ -37,9 +45,34 @@ def chart_generate(df, x, y, title):
 
 
 def data_preparation(df):
+    """
+    - Recebe um DataFrame oriundo do tratamento da função load_data()
+    - separa e retorna as variáveis X e y
+    X => variável independente ('eu controlo')
+    y => variável dependente ('muda em relação à alteração da variável controle')
+
+    'a variável independente é controlada pelo experimentador, 
+    enquanto o valor da variável dependente só muda em resposta à variável independente'
+    Saiba mais em:
+    https://datascience.eu/pt/matematica-e-estatistica/uma-atualizacao-na-analise-de-regressao/
+
+    Args:
+        df (pandas.Series): Colunas X e y de um DataFrame pandas
+
+    Returns:
+        tuple: Valores e X e y
+    """    
     X = df.iloc[:, :-1].values
     y = df.iloc[:, 1].values
     return (X, y)
+
+
+def show_coef_intercept():
+    """Coeficiente angular e interceptação em y de uma equação
+    Returns:
+        str: valores formatados para coeficientes B0 e B1
+    """    
+    return f"B1 (coef_)     : {modelo.coef_}\nB0 (intercept_): {modelo.intercept_}"
 
 
 arquivo = "Projeto-02/data/dataset.csv"
@@ -50,6 +83,7 @@ X, y = data_preparation(df)
 
 TEST_SIZE = 0.3
 RANDOM_STATE = 0
+
 X_treino, X_teste, y_treino, y_teste = train_test_split(
     X, y, test_size=TEST_SIZE, random_state=RANDOM_STATE
 )
@@ -61,13 +95,7 @@ modelo = LinearRegression()
 modelo.fit(X_treino, y_treino)
 print("\nModelo treinado com sucesso!")
 
-# coeficientes B0 e B1
-print(
-    f"""
-      B1 (coef_)     : {modelo.coef_}
-      B0 (intercept_): {modelo.intercept_}
-      """
-)
+print(show_coef_intercept())
 
 # Plot Regressão Linear
 # y = B1 * X + B0
