@@ -154,6 +154,8 @@ avaliacao_do_modelo(y_teste, y_pred)
 print("------------------------")
 print("Previsão para retorno com novos dados")
 
+## assim como treinamos o modelo, entregamos a ele os dados no mesmo formato
+## os mesmos usados na transformação e análise dos dados de teste para treino do modelo
 input_investimento = float(input("Digite o valor do investimento: ").strip())
 investimento = np.array([input_investimento])
 investimento = investimento.reshape(-1, 1)
