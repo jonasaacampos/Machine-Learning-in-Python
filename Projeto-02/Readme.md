@@ -47,8 +47,6 @@ b0 e b1 são estimados durante o treinamento com dados históricos
 
 ## Demo
 
-
-
 <table>
 <thead>
   <tr>
@@ -58,12 +56,14 @@ b0 e b1 são estimados durante o treinamento com dados históricos
 </thead>
 <tbody>
   <tr>
-    <td><img scr='../img/part01-atual-vs-previsto.png'></td>
-    <td></td>
+    <td><img src='../img/part01-atual-vs-previsto.png'/></td>
+    <td><img src='../img/parte1-linha-regressao.png'/></td>
   </tr>
 </tbody>
 </table>
 
+
+![](../img/demo-proj02-pt01.gif)
 
 ## Para saber mais
 
