@@ -6,7 +6,7 @@ from sklearn.linear_model import LinearRegression  # cria modelo
 from sklearn.model_selection import train_test_split  # treina modelo
 
 # para filtrar ruídos do modelo
-from sklearn.metrics import mean_squared_log_error, mean_absolute_error, r2_score
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 
 import warnings
 warnings.filterwarnings("ignore")
@@ -134,6 +134,21 @@ plt.xticks(index + bar_width, X_teste)
 plt.legend()
 plt.savefig("img/part01-atual-vs-previsto.png")
 # plt.show()
+
+def avaliacao_do_modelo(y_teste, y_pred):
+    print(f"""                      Avaliação do modelo
+            .......................................................................
+            
+            MAE.........(Mean Abolute Error): {mean_absolute_error(y_teste, y_pred)}
+            MSE.........(Mean Squared Error): {mean_squared_error(y_teste, y_pred)}
+            RMSE...(Root Mean Squared Error): {math.sqrt(mean_squared_error(y_teste, y_pred))}
+            R2 Score........................: {r2_score(y_teste, y_pred)}
+
+            .......................................................................
+          """)
+
+
+avaliacao_do_modelo(y_teste, y_pred)
 
 ## inserindo dados desconhecidos...
 print("------------------------")

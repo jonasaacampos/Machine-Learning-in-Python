@@ -42,6 +42,8 @@ b0 e b1 são estimados durante o treinamento com dados históricos
 
 ## To do
 - [x] Fazer funções para organizar código
+- [ ] Rotacionar eixo X da legenda do gráfico de comparação
+- [ ] 
 
 ## Demo
 
