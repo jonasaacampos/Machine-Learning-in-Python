@@ -132,7 +132,11 @@ actual = plt.bar(index, df_valores["Real"], bar_width, label="Valor Real")
 plt.xlabel("Investimento")
 plt.ylabel("Retorno")
 plt.title("Valor Real X Previsto")
+<<<<<<< HEAD
 plt.xticks(index + bar_width, X_teste, rotation=90)
+=======
+#plt.xticks(index + bar_width, X_teste, rotation=90)
+>>>>>>> 361bf57 (🐛 rotação de eixo x atualizado toDo readme)
 plt.legend()
 plt.savefig("img/part01-atual-vs-previsto.png")
 plt.show()
