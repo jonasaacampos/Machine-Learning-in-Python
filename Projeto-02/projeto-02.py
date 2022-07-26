@@ -40,7 +40,9 @@ def chart_generate(df, x, y, title):
     df.plot(x=x, y=y, style="o")
     plt.title(title)
     plt.xlabel(x)
+    plt.xticks(rotation=90)
     plt.ylabel(y)
+    plt.show()
     plt.savefig("img/pt01-fig01.png")
 
 
@@ -106,7 +108,7 @@ plt.xlabel("Investimento")
 plt.ylabel("Retorno")
 plt.plot(X, regression_line, color="black")
 plt.savefig("img/parte1-linha-regressao.png")
-# plt.show()
+plt.show()
 
 # Previsão com dados de teste
 y_pred = modelo.predict(X_teste)
@@ -130,10 +132,10 @@ actual = plt.bar(index, df_valores["Real"], bar_width, label="Valor Real")
 plt.xlabel("Investimento")
 plt.ylabel("Retorno")
 plt.title("Valor Real X Previsto")
-plt.xticks(index + bar_width, X_teste)
+plt.xticks(index + bar_width, X_teste, rotation=90)
 plt.legend()
 plt.savefig("img/part01-atual-vs-previsto.png")
-# plt.show()
+plt.show()
 
 def avaliacao_do_modelo(y_teste, y_pred):
     print(f"""                      Avaliação do modelo
