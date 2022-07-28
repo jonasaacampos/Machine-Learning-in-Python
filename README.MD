@@ -6,9 +6,44 @@
 
 <img alt="brain" src="img/brain.png" width=150 align=right>
 
-<h1>Machine Learning em Python e C++</h1>
+<h1>Machine Learning em Python</h1>
+
+![](https://img.shields.io/badge/BackEnd-Python-informational?style=flat&logo=Python&logoColor=white&color=059A10)
 
 Anotações e projetos do curso de formação em Engenharia de Machine Learning.
+
+![](img/cover-repo.png)
+
+## Projetos
+- [x] [Classificação de Texto com aprendizadgem supervisionada](Projeto-01)
+  - Projeto de extração e análise de fóruns de redes sociais com o objetivo de construir um modelo de aprendizado de máquina que classifica o conteúdo das postagens de forma automática.
+- [x] [Criação de modelo de aprendizado de máquina que prevê o retorno financeiro de investimentos em títulos públicos](Projeto-02)
+  - Construção de modelos de machine learning para prever o retorno de um investimento
+
+[![](https://img.shields.io/badge/feito%20com%20%E2%9D%A4%20por-jaac-cyan)](https://jonasaacampos.github.io/portfolio/)
+[![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-Profile-informational?style=flat&logo=linkedin&logoColor=white&color=0D76A8)](https://www.linkedin.com/in/jonasaacampos)
+
+--------
+<h2>Table of Contents</h2>
+
+- [Projetos](#projetos)
+- [O papel do Engenheiro de Machine Learning na contrução de modelos](#o-papel-do-engenheiro-de-machine-learning-na-contrução-de-modelos)
+- [Exemplo de problemas de Machine Learning](#exemplo-de-problemas-de-machine-learning)
+- [Definição de modelo de machine learning](#definição-de-modelo-de-machine-learning)
+- [Riscos e Oportunidade](#riscos-e-oportunidade)
+- [Framework](#framework)
+  - [Principais frameworks de Machine Learning](#principais-frameworks-de-machine-learning)
+- [Modelos de MAchine Learning](#modelos-de-machine-learning)
+  - [Modelos de Classificação:](#modelos-de-classificação)
+  - [Modelos de Regressão](#modelos-de-regressão)
+  - [Modelos de Clustering](#modelos-de-clustering)
+  - [Modelos de Associação](#modelos-de-associação)
+  - [Modelos de Deep Learning](#modelos-de-deep-learning)
+- [Para saber mais](#para-saber-mais)
+- [Crédito das imagens](#crédito-das-imagens)
+- [Contato](#contato)
+
+----------
 
 ## O papel do Engenheiro de Machine Learning na contrução de modelos
 
@@ -103,3 +138,23 @@ IA é um nome comercial. Deep Learning é o resultado de análises estatísticas
 - Machine Learning with Python for Everyone, Mark Fenne
 - The Hundred-Page Machine Learning Book, Andriy Burkov
 
+## Crédito das imagens
+
+- Desenhos no título by [flaticon](https://www.flaticon.com)
+- Badges e demos do projeto feitos por mim
+
+<!-- CONTACT -->
+## Contato
+
+**Author:** Jonas Araujo de Avila Campos
+
+**Confira mais projetos: [AQUI](https://jonasaacampos.github.io/portfolio/)**
+
+<p align='center'>
+  <a href='https://github.com/jonasaacampos'>
+    <img src='https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white'/>
+  </a>
+  <a href='https://www.linkedin.com/in/jonasaacampos/'>
+    <img src='https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white'/>
+  </a>
+</p>

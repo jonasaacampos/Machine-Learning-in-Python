@@ -4,12 +4,20 @@
       </a>
 </p>
 
-<img alt="brain" src="img/brain.png" width=150 align=right>
+<img alt="brain" src="img/../../img/text.png" width=150 align=right>
 
 <h1>Classificação de Texto com aprendizadgem supervisionada</h1>
 
-Projeto de extração, análise e previsões em fóruns da internet.
+Projeto de extração e análise de fóruns de redes sociais com o objetivo de construir um modelo de aprendizado de máquina que classifica o conteúdo das postagens de forma automática.
 
+[![](https://img.shields.io/badge/feito%20com%20%E2%9D%A4%20por-jaac-cyan)](https://jonasaacampos.github.io/portfolio/)
+[![LinkedIn Badge](https://img.shields.io/badge/LinkedIn-Profile-informational?style=flat&logo=linkedin&logoColor=white&color=0D76A8)](https://www.linkedin.com/in/jonasaacampos)
+
+<h2>Table of contents</h2>
+
+- [O que este projeto faz](#o-que-este-projeto-faz)
+- [Definição do projeto](#definição-do-projeto)
+- [Ambiente de desenvolvimento](#ambiente-de-desenvolvimento)
 ## O que este projeto faz
 
 São extraídas em tempo real postagens dos seguintes temas:
